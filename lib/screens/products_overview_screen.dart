@@ -4,9 +4,9 @@ import '../widgets/product_item.dart';
 import '../models/product.dart';
 class ProductOverviewScreen extends StatelessWidget {
   @override
-
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         title: Text(
           'iShop'
