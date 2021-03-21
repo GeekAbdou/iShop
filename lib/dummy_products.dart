@@ -1,4 +1,4 @@
-import 'provider/product.dart';
+import './providers/product.dart';
 
 final List<Product> productsItems = [
   Product(
