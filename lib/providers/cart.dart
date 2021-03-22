@@ -15,37 +15,43 @@ class CartItem {
 }
 
 class Cart with ChangeNotifier {
-  Map<String, CartItem> _items;
+  Map<String, CartItem> _items = {};
 
   Map<String, CartItem> get items {
     return {..._items};
   }
 
+  int get itemCount {
+    return _items.length;
+  }
+
   void addItem(
-    String ProductId,
-    double Price,
-    String Title,
+    String productId,
+    double price,
+    String title,
   ) {
-    if (_items.containsKey(ProductId)) {
+    if (_items.containsKey(productId)) {
+      // change quantity...
       _items.update(
-        ProductId,
-        (existingItem) => CartItem(
-          id: existingItem.id,
-          title: existingItem.title,
-          price: existingItem.price,
-          quantity: existingItem.quantity +1 ,
-        ),
+        productId,
+        (existingCartItem) => CartItem(
+              id: existingCartItem.id,
+              title: existingCartItem.title,
+              price: existingCartItem.price,
+              quantity: existingCartItem.quantity + 1,
+            ),
       );
     } else {
       _items.putIfAbsent(
-        ProductId,
+        productId,
         () => CartItem(
-          id: DateTime.now().toString(),
-          title: Title,
-          price: Price,
-          quantity: 1,
-        ),
+              id: DateTime.now().toString(),
+              title: title,
+              price: price,
+              quantity: 1,
+            ),
       );
     }
+    notifyListeners();
   }
 }
