@@ -54,7 +54,7 @@ class Products with ChangeNotifier {
   }
 
   Future<void> addProduct(Product product) {
-    const url = 'https://ishop-fire-base-default-rtdb.firebaseio.com/products.json';
+    const url = 'https://ishop-fire-base-default-rtdb.firebaseio.com/products';
     return http.post(
       url,
       body: json.encode({
@@ -76,7 +76,9 @@ class Products with ChangeNotifier {
         _items.add(newProduct); // at the start of the list
         notifyListeners();
       },
-    );
+    ).catchError((error){
+      throw error;
+    });
   }
 
   void deleteProduct(String id) {
