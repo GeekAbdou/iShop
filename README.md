@@ -1,3 +1,3 @@
 # ishop -Ecommerce App-
 
-updated later
+will be updated later
