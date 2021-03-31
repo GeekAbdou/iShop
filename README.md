@@ -1,5 +1,3 @@
-# ishop
-
-A new Flutter application.
+# ishop -Ecommerce App-
 
 updated later
