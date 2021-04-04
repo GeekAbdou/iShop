@@ -1,6 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class Product with ChangeNotifier {
   final String id;
@@ -19,17 +20,16 @@ class Product with ChangeNotifier {
     this.isFavorite = false,
   });
 
-
-   void _setFavValue(bool newValue) {
+  void _setFavValue(bool newValue) {
     isFavorite = newValue;
     notifyListeners();
   }
 
-  Future<void> toggleFavoriteStatus() async {
+  Future<void> toggleFavoriteStatus(String authToken) async {
     final oldStatus = isFavorite;
     isFavorite = !isFavorite;
     notifyListeners();
-    final url = 'https://ishop-fire-base-default-rtdb.firebaseio.com/products/$id.json';
+    final url = 'https://flutter-update.firebaseio.com/products/$id.json?auth=$authToken';
     try {
       final response = await http.patch(
         url,
@@ -44,5 +44,4 @@ class Product with ChangeNotifier {
       _setFavValue(oldStatus);
     }
   }
-
 }
