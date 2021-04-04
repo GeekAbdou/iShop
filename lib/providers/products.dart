@@ -7,13 +7,15 @@ import '../models/http_exception.dart';
 import './product.dart';
 
 class Products with ChangeNotifier {
-  List<Product> _items = [];
+  List<Product> _items = [
+  ];
+  // var _showFavoritesOnly = false;
 
+  String authToken;
+
+  Products(this.authToken,this._items);
 
   List<Product> get items {
-    // if (_showFavoritesOnly) {
-    //   return _items.where((prodItem) => prodItem.isFavorite).toList();
-    // }
     return [..._items];
   }
 
@@ -25,21 +27,14 @@ class Products with ChangeNotifier {
     return _items.firstWhere((prod) => prod.id == id);
   }
 
-  // void showFavoritesOnly() {
-  //   _showFavoritesOnly = true;
-  //   notifyListeners();
-  // }
-
-  // void showAll() {
-  //   _showFavoritesOnly = false;
-  //   notifyListeners();
-  // }
-
   Future<void> fetchAndSetProducts() async {
-    const url = 'https://ishop-fire-base-default-rtdb.firebaseio.com/products.json';
+    final url = 'https://ishop-fire-base-default-rtdb.firebaseio.com/products.json?auth=$authToken';
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      if (extractedData == null) {
+        return;
+      }
       final List<Product> loadedProducts = [];
       extractedData.forEach((prodId, prodData) {
         loadedProducts.add(Product(
