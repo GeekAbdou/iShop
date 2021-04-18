@@ -2,8 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../models/http_exception.dart';
+
 import '../providers/auth.dart';
+import '../models/http_exception.dart';
 
 enum AuthMode { Signup, Login }
 
@@ -12,7 +13,6 @@ class AuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     final deviceSize = MediaQuery.of(context).size;
     // final transformConfig = Matrix4.rotationZ(-8 * pi / 180);
     // transformConfig.translate(-10.0);
@@ -103,7 +103,8 @@ class _AuthCardState extends State<AuthCard> {
   };
   var _isLoading = false;
   final _passwordController = TextEditingController();
-void _showErrorDialog(String message) {
+
+  void _showErrorDialog(String message) {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -120,6 +121,7 @@ void _showErrorDialog(String message) {
           ),
     );
   }
+
   Future<void> _submit() async {
     if (!_formKey.currentState.validate()) {
       // Invalid!
@@ -144,8 +146,8 @@ void _showErrorDialog(String message) {
         );
       }
     } on HttpException catch (error) {
-      var errorMessage = 'Authantication Error';
-       if (error.toString().contains('EMAIL_EXISTS')) {
+      var errorMessage = 'Authentication failed';
+      if (error.toString().contains('EMAIL_EXISTS')) {
         errorMessage = 'This email address is already in use.';
       } else if (error.toString().contains('INVALID_EMAIL')) {
         errorMessage = 'This is not a valid email address';
@@ -156,11 +158,13 @@ void _showErrorDialog(String message) {
       } else if (error.toString().contains('INVALID_PASSWORD')) {
         errorMessage = 'Invalid password.';
       }
-        _showErrorDialog(errorMessage);
-    } catch (error){
-      var errorMessage = 'Couldn\t Authanticate You Please Try Again Later';
+      _showErrorDialog(errorMessage);
+    } catch (error) {
+      const errorMessage =
+          'Could not authenticate you. Please try again later.';
       _showErrorDialog(errorMessage);
     }
+
     setState(() {
       _isLoading = false;
     });

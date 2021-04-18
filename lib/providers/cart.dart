@@ -43,23 +43,28 @@ class Cart with ChangeNotifier {
       _items.update(
         productId,
         (existingCartItem) => CartItem(
-          id: existingCartItem.id,
-          title: existingCartItem.title,
-          price: existingCartItem.price,
-          quantity: existingCartItem.quantity + 1,
-        ),
+              id: existingCartItem.id,
+              title: existingCartItem.title,
+              price: existingCartItem.price,
+              quantity: existingCartItem.quantity + 1,
+            ),
       );
     } else {
       _items.putIfAbsent(
         productId,
         () => CartItem(
-          id: DateTime.now().toString(),
-          title: title,
-          price: price,
-          quantity: 1,
-        ),
+              id: DateTime.now().toString(),
+              title: title,
+              price: price,
+              quantity: 1,
+            ),
       );
     }
+    notifyListeners();
+  }
+
+  void removeItem(String productId) {
+    _items.remove(productId);
     notifyListeners();
   }
 
@@ -69,22 +74,16 @@ class Cart with ChangeNotifier {
     }
     if (_items[productId].quantity > 1) {
       _items.update(
-        productId,
-        (existingCartItem) => CartItem(
-          id: existingCartItem.id,
-          title: existingCartItem.title,
-          price: existingCartItem.price,
-          quantity: existingCartItem.quantity - 1,
-        ),
-      );
+          productId,
+          (existingCartItem) => CartItem(
+                id: existingCartItem.id,
+                title: existingCartItem.title,
+                price: existingCartItem.price,
+                quantity: existingCartItem.quantity - 1,
+              ));
     } else {
       _items.remove(productId);
     }
-    notifyListeners();
-  }
-
-  void removeItem(String productId) {
-    _items.remove(productId);
     notifyListeners();
   }
 

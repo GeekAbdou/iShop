@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:ishop/providers/products.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/app_drawer.dart';
 import '../widgets/products_grid.dart';
 import '../widgets/badge.dart';
 import '../providers/cart.dart';
-import '../providers/products.dart';
 import './cart_screen.dart';
+import '../providers/products.dart';
 
 enum FilterOptions {
   Favorites,
@@ -21,8 +20,17 @@ class ProductsOverviewScreen extends StatefulWidget {
 
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   var _showOnlyFavorites = false;
-  bool _isInit = true;
-  bool _isLoading = false;
+  var _isInit = true;
+  var _isLoading = false;
+
+  @override
+  void initState() {
+    // Provider.of<Products>(context).fetchAndSetProducts(); // WON'T WORK!
+    // Future.delayed(Duration.zero).then((_) {
+    //   Provider.of<Products>(context).fetchAndSetProducts();
+    // });
+    super.initState();
+  }
 
   @override
   void didChangeDependencies() {
@@ -87,7 +95,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
         ],
       ),
       drawer: AppDrawer(),
-            body: _isLoading
+      body: _isLoading
           ? Center(
               child: CircularProgressIndicator(),
             )
