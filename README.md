@@ -77,6 +77,6 @@
 <br>
 <hr>
 
-#TODO 
+# TODO 
 * Updating UI theme to elegint one
 * Adding More Filters
