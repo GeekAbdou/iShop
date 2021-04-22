@@ -1,4 +1,4 @@
-# QuizApp (Flutter - Dart)
+# iShop (Flutter - Dart)
 
 <table>
 <tr>
