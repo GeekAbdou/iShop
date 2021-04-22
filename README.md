@@ -3,15 +3,15 @@
 <table>
 <tr>
 <td>
-<strong>An App to your shop , you can Add products , Edit products , Favourites products , Makeing filter to your products , Admin and user accounts , Purchasing products .</strong>
+<strong>An App to your shop , you can Add products , Edit products , Favorites products , Making filter to your products , Admin and user accounts , Purchasing products .</strong>
 </td>
 </tr>
 </table>
 
 ## 👨‍🎓 What I learned in this app ?
-* State Management (Provider and Consumer) and worked with multible providers .
+* State Management (Provider and Consumer) and worked with multiple providers .
 * User Inputs , output and Validation . 
-* HTTP requests and Fetching data , FireBase connection and manual Authantication , automatic out and managing Tokens locally.
+* HTTP requests and Fetching data , FireBase connection and manual Authentication , automatic out and managing Tokens locally.
 * Animation
 
 
@@ -20,9 +20,9 @@
 * User account and Admin account
 * Add products
 * Edit products
-* Favourites products
+* Favorites  products
 * Purchasing products 
-* Makeing filter to your products
+* Making filter to your products
 
 
 ## Requirements
